@@ -17,6 +17,8 @@
 #include "signal_restore_posix.h"
 #endif
 
+#include <iostream>
+
 namespace {
 
 Context* g_context = NULL;
@@ -77,7 +79,7 @@ bool Context::Initialize(JNIEnv* env,
 #endif
 
   CefSettings settings = GetJNISettings(env, jsettings);
-
+    std::cout << "framework " << settings.framework_dir_path.str << std::endl;
   // Sandbox is not supported because:
   // - Use of a separate sub-process executable on Windows.
   // - Use of a temporary file to communicate custom schemes to the

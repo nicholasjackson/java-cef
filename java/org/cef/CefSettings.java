@@ -57,7 +57,8 @@ public class CefSettings {
     public class ColorType {
         private long color_value = 0;
 
-        private ColorType() {}
+        private ColorType() {
+        }
 
         public ColorType(int alpha, int red, int green, int blue) {
             color_value = (alpha << 24) | (red << 16) | (green << 8) | (blue << 0);
@@ -76,24 +77,32 @@ public class CefSettings {
     }
 
     /**
-     * The path to a separate executable that will be launched for sub-processes.
-     * By default the browser process executable is used. See the comments on
+     * The path to a separate executable that will be launched for sub-processes. By
+     * default the browser process executable is used. See the comments on
      * CefExecuteProcess() for details. Also configurable using the
      * "browser-subprocess-path" command-line switch.
      */
     public String browser_subprocess_path = null;
 
+    ///
+    // The path to the CEF framework directory on macOS. If this value is empty
+    // then the framework must exist at "Contents/Frameworks/Chromium Embedded
+    // Framework.framework" in the top-level app bundle. Also configurable using
+    // the "framework-dir-path" command-line switch.
+    ///
+    public String framework_dir_path = null;
+
     /**
      * Set to true to enable windowless (off-screen) rendering support. Do not
-     * enable this value if the application does not use windowless rendering as
-     * it may reduce rendering performance on some systems.
+     * enable this value if the application does not use windowless rendering as it
+     * may reduce rendering performance on some systems.
      */
     public boolean windowless_rendering_enabled = true;
 
     /**
      * Set to true to disable configuration of browser process features using
-     * standard CEF and Chromium command-line arguments. Configuration can still
-     * be specified using CEF data structures or via the
+     * standard CEF and Chromium command-line arguments. Configuration can still be
+     * specified using CEF data structures or via the
      * CefApp::OnBeforeCommandLineProcessing() method.
      */
     public boolean command_line_args_disabled = false;
@@ -124,35 +133,34 @@ public class CefSettings {
     public String user_agent = null;
 
     /**
-     * Value that will be inserted as the product portion of the default
-     * User-Agent string. If empty the Chromium product version will be used. If
-     * |userAgent| is specified this value will be ignored. Also configurable
-     * using the "product-version" command-line switch.
+     * Value that will be inserted as the product portion of the default User-Agent
+     * string. If empty the Chromium product version will be used. If |userAgent| is
+     * specified this value will be ignored. Also configurable using the
+     * "product-version" command-line switch.
      */
     public String product_version = null;
 
     /**
-     * The locale string that will be passed to Blink. If empty the default
-     * locale of "en-US" will be used. This value is ignored on Linux where locale
-     * is determined using environment variable parsing with the precedence order:
+     * The locale string that will be passed to Blink. If empty the default locale
+     * of "en-US" will be used. This value is ignored on Linux where locale is
+     * determined using environment variable parsing with the precedence order:
      * LANGUAGE, LC_ALL, LC_MESSAGES and LANG. Also configurable using the "lang"
      * command-line switch.
      */
     public String locale = null;
 
     /**
-     * The directory and file name to use for the debug log. If empty, the
-     * default name of "debug.log" will be used and the file will be written
-     * to the application directory. Also configurable using the "log-file"
-     * command-line switch.
+     * The directory and file name to use for the debug log. If empty, the default
+     * name of "debug.log" will be used and the file will be written to the
+     * application directory. Also configurable using the "log-file" command-line
+     * switch.
      */
     public String log_file = null;
 
     /**
      * The log severity. Only messages of this severity level or higher will be
-     * logged. Also configurable using the "log-severity" command-line switch with
-     * a value of "verbose", "info", "warning", "error", "error-report" or
-     * "disable".
+     * logged. Also configurable using the "log-severity" command-line switch with a
+     * value of "verbose", "info", "warning", "error", "error-report" or "disable".
      */
     public LogSeverity log_severity = LogSeverity.LOGSEVERITY_DEFAULT;
 
@@ -164,29 +172,27 @@ public class CefSettings {
     public String javascript_flags = null;
 
     /**
-     * The fully qualified path for the resources directory. If this value is
-     * empty the cef.pak and/or devtools_resources.pak files must be located in
-     * the module directory on Windows/Linux or the app bundle Resources directory
-     * on Mac OS X. Also configurable using the "resources-dir-path" command-line
-     * switch.
+     * The fully qualified path for the resources directory. If this value is empty
+     * the cef.pak and/or devtools_resources.pak files must be located in the module
+     * directory on Windows/Linux or the app bundle Resources directory on Mac OS X.
+     * Also configurable using the "resources-dir-path" command-line switch.
      */
     public String resources_dir_path = null;
 
     /**
      * The fully qualified path for the locales directory. If this value is empty
-     * the locales directory must be located in the module directory. This value
-     * is ignored on Mac OS X where pack files are always loaded from the app
-     * bundle Resources directory. Also configurable using the "locales-dir-path"
+     * the locales directory must be located in the module directory. This value is
+     * ignored on Mac OS X where pack files are always loaded from the app bundle
+     * Resources directory. Also configurable using the "locales-dir-path"
      * command-line switch.
      */
     public String locales_dir_path = null;
 
     /**
-     * Set to true to disable loading of pack files for resources and locales.
-     * A resource bundle handler must be provided for the browser and render
-     * processes via CefApp::GetResourceBundleHandler() if loading of pack files
-     * is disabled. Also configurable using the "disable-pack-loading" command-
-     * line switch.
+     * Set to true to disable loading of pack files for resources and locales. A
+     * resource bundle handler must be provided for the browser and render processes
+     * via CefApp::GetResourceBundleHandler() if loading of pack files is disabled.
+     * Also configurable using the "disable-pack-loading" command- line switch.
      */
     public boolean pack_loading_disabled = false;
 
@@ -200,36 +206,38 @@ public class CefSettings {
     public int remote_debugging_port = 0;
 
     /**
-     * The number of stack trace frames to capture for uncaught exceptions.
-     * Specify a positive value to enable the CefV8ContextHandler::
-     * OnUncaughtException() callback. Specify 0 (default value) and
-     * OnUncaughtException() will not be called. Also configurable using the
-     * "uncaught-exception-stack-size" command-line switch.
+     * The number of stack trace frames to capture for uncaught exceptions. Specify
+     * a positive value to enable the CefV8ContextHandler:: OnUncaughtException()
+     * callback. Specify 0 (default value) and OnUncaughtException() will not be
+     * called. Also configurable using the "uncaught-exception-stack-size"
+     * command-line switch.
      */
     public int uncaught_exception_stack_size = 0;
 
     /**
-     * Set to true to ignore errors related to invalid SSL certificates.
-     * Enabling this setting can lead to potential security vulnerabilities like
-     * "man in the middle" attacks. Applications that load content from the
-     * internet should not enable this setting. Also configurable using the
-     * "ignore-certificate-errors" command-line switch.
+     * Set to true to ignore errors related to invalid SSL certificates. Enabling
+     * this setting can lead to potential security vulnerabilities like "man in the
+     * middle" attacks. Applications that load content from the internet should not
+     * enable this setting. Also configurable using the "ignore-certificate-errors"
+     * command-line switch.
      */
     public boolean ignore_certificate_errors = false;
 
     /**
      * Opaque background color used for accelerated content. By default the
      * background color will be white. Only the RGB compontents of the specified
-     * value will be used. The alpha component must greater than 0 to enable use
-     * of the background color but will be otherwise ignored.
+     * value will be used. The alpha component must greater than 0 to enable use of
+     * the background color but will be otherwise ignored.
      */
     public ColorType background_color = null;
 
-    public CefSettings() {}
+    public CefSettings() {
+    }
 
     @Override
     public CefSettings clone() {
         CefSettings tmp = new CefSettings();
+        tmp.framework_dir_path = framework_dir_path;
         tmp.browser_subprocess_path = browser_subprocess_path;
         tmp.windowless_rendering_enabled = windowless_rendering_enabled;
         tmp.command_line_args_disabled = command_line_args_disabled;
@@ -247,7 +255,8 @@ public class CefSettings {
         tmp.remote_debugging_port = remote_debugging_port;
         tmp.uncaught_exception_stack_size = uncaught_exception_stack_size;
         tmp.ignore_certificate_errors = ignore_certificate_errors;
-        if (background_color != null) tmp.background_color = background_color.clone();
+        if (background_color != null)
+            tmp.background_color = background_color.clone();
         return tmp;
     }
 }
